@@ -32,6 +32,28 @@ $arr2 = ['a' => 1, 'b' => 2, 'c' => 3, ...$arr1];
 
 The new syntax gives equivalent behaviour to the ''array_merge()'' example above, where the contents of ''$arr1'' are appended to the array literal, and stored in ''$arr2''. The same rules for merging are followed; in the case of duplicated string keys, the later value overwrites the earlier when read from left to right, and numerically indexed arrays are appropriately re-keyed and appended. Any number of variables can be unpacked at any position in the array literal, and may be combined with regular element declarations in any order.
 
+As such, the following applications of this operator should be equivalent:
+<code php>
+<?php
+$array1 = ["color" => "red", "model" => "Corolla"];
+$array2 = ["type" => "car", "year" => "2002"];
+
+$result = array_merge($array1, $array2);
+$result2 = [...$array1, ...$array2];
+?>
+</code>
+
+Combinations of the splat operator in variable and in other literal should also work:
+<code php>
+<?php
+$array1 = ["color" => "red", "model" => "Corolla"];
+$array2 = ["type" => "car", "year" => "2002"];
+
+$result = array_merge($array1, ["category" => "suv", "condition" => "good"], $array2);
+$result2 = [...$array1, ...["category" => "suv", "condition" => "good"], ...$array2];
+?>
+</code>
+
 ===== Backward Incompatible Changes =====
 None.
 
