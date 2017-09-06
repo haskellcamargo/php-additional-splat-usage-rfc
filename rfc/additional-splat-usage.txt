@@ -34,42 +34,44 @@ The new syntax gives equivalent behaviour to the ''array_merge()'' example above
 
 As such, the following application of ''array_merge()'' and of the splat operator and  should be equivalent:
 <code php>
-<?php
 $array1 = ["color" => "red", "model" => "Corolla"];
 $array2 = ["type" => "car", "year" => "2002"];
 
 $result = array_merge($array1, $array2);
 $result2 = [...$array1, ...$array2];
-?>
 </code>
 
 A mixture of applying the splat operator to previously assigned variables and other literal should work just as fine:
 <code php>
-<?php
 $array1 = ["color" => "red", "model" => "Corolla"];
 $array2 = ["type" => "car", "year" => "2002"];
 
 $result = array_merge($array1, ["category" => "suv", "condition" => "good"], $array2);
 $result2 = [...$array1, ...["category" => "suv", "condition" => "good"], ...$array2];
-?>
 </code>
 
-The operator should have the same behaviour for Numeric and Associative Arrays. 
+The operator should have the same behaviour for numeric and associative arrays. 
 Multidimensional arrays should not be flattened: the splat operator should have effect in the first level keys only.
+
+=== Numeric ===
+
 <code php>
-<?php
-/* Numeric */
 $threetofive = [3,4,5];
 $zerotofive = [0, 1, 2, ...$threetofive];
+</code>
 
-/* Associative */
+=== Associative ===
+
+<code php>
 $addressData = ["street" => "George St.", "number" => 2];
 $cityData = ["city" => "Brisbane", "postcode" => 4000];
 
 $propertyData = ["name" => "QUT", ...$addressData, ...$cityData];
+</code>
 
-/* Multidimensional */
+=== Multidimensional ===
 
+<code php>
 $old_marks = [
  "john" => [
     "maths" => 0,
@@ -92,7 +94,6 @@ $new_marks = [
   ],
   ...$old_marks
 ]; /* array(4) { ["matthew"]=> ... ["john"]=> ... ["jane"]=> ... ["joe"]=> ... }*/
-?>
 </code>
 
 
