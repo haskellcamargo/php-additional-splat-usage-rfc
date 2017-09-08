@@ -32,13 +32,19 @@ $arr2 = ['a' => 1, 'b' => 2, 'c' => 3, ...$arr1];
 
 The new syntax gives equivalent behaviour to the ''array_merge()'' example above, where the contents of ''$arr1'' are appended to the array literal, and stored in ''$arr2''. The same rules for merging are followed; in the case of duplicated string keys, the later value overwrites the earlier when read from left to right, and numerically indexed arrays are appropriately re-keyed and appended. Any number of variables can be unpacked at any position in the array literal, and may be combined with regular element declarations in any order.
 
-As such, the following application of ''array_merge()'' and of the splat operator and  should be equivalent:
+As such, the following application of ''array_merge()'' and of the splat operator and should be equivalent:
 <code php>
 $array1 = ["color" => "red", "model" => "Corolla"];
 $array2 = ["type" => "car", "year" => "2002"];
 
 $result = array_merge($array1, $array2);
 $result2 = [...$array1, ...$array2];
+</code>
+
+Still considering the example above, a more beautiful way of arrays value copying is gained, as ''$arr = $arrToCopy'' may seem a little ambiguous at first (e.g., whether the reference or the value of an array is being copied):
+<code php>
+$array1 = ['a' => 1, 'b' => 2, 'c' => 3];
+$array2 = [...$array1];
 </code>
 
 A mixture of applying the splat operator to previously assigned variables and other literal should work just as fine:
